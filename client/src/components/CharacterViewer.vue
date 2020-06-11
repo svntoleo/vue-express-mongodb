@@ -93,7 +93,6 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
-        this.$root.getCharacters();
     },
     toggleEditCharacter: function(character) {
       var modal = this.$el.querySelector(".modal-mask");
