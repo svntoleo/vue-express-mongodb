@@ -3,7 +3,10 @@
     <button v-on:click="modalController = 'characterCreator'">Create Character</button>
 
     <!-- CHARACTER VIEWER -->
-    <div v-if="modalController == 'characterViewer'||'characterEditor'" class="character-viewer">
+    <div
+      v-if="modalController == 'characterViewer'||'characterEditor'||'characterCreator'"
+      class="character-viewer"
+    >
       <h1>{{ msg1 }}</h1>
 
       <p v-for="(character, index) in characters" v-bind:key="index">
@@ -31,8 +34,6 @@
                 <option value="Warrior">Warrior</option>
                 <option value="Mage">Mage</option>
                 <option value="Archer">Archer</option>
-                <option value="Ninja">Ninja</option>
-                <option value="Ghost">Ghost</option>
               </select>
             </label>
           </form>
@@ -73,6 +74,8 @@
                     <option value="Warrior">Warrior</option>
                     <option value="Mage">Mage</option>
                     <option value="Archer">Archer</option>
+                    <option value="Ninja">Ninja</option>
+                    <option value="Ghost">Ghost</option>
                   </select>
                 </label>
               </form>
@@ -84,7 +87,7 @@
               <button
                 v-on:click="updateCharacter(character);modalController = 'characterViewer'"
               >Save</button>
-              <button v-on:click="modalController = 'characterViewer'; toggleEditCharacter">Cancelar</button>
+              <button v-on:click="modalController = 'characterViewer'; toggleEditCharacter">Cancel</button>
             </slot>
           </div>
         </div>
@@ -192,6 +195,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+label {
+  display: block;
+}
+
+li {
+  list-style: none;
+}
+
 .modal-mask {
   position: fixed;
   z-index: 9998;
