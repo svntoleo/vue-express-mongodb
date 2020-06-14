@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Character msg1="Character Viewer" msg2="Character Creator" msg3="Edit Character"/>
+    <Character msg1="Your Characters" msg2="Create Character" msg3="Edit Character"/>
   </div>
 </template>
 

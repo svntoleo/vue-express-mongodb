@@ -4,7 +4,7 @@
 
     <!-- CHARACTER VIEWER -->
     <div
-      v-if="modalController == 'characterViewer'||'characterEditor'||'characterCreator'"
+      v-if="modalController === 'characterViewer'||'characterEditor'||'characterCreator'"
       class="character-viewer"
     >
       <h1>{{ msg1 }}</h1>
@@ -18,7 +18,7 @@
       </p>
     </div>
     <!-- CHARACTER CREATOR -->
-    <div v-if="modalController == 'characterCreator'" class="character-creator modal-mask">
+    <div v-if="modalController === 'characterCreator'" class="character-creator modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
           <h1>{{ msg2 }}</h1>
@@ -31,9 +31,10 @@
             <label for="character-class">
               Class:
               <select id="class-list" v-model="classChoosed">
-                <option value="Warrior">Warrior</option>
-                <option value="Mage">Mage</option>
-                <option value="Archer">Archer</option>
+                <option
+                  v-for="(classToChoose, index) in classesToChoose"
+                  v-bind:key="index"
+                >{{classToChoose}}</option>
               </select>
             </label>
           </form>
@@ -51,7 +52,7 @@
     </div>
 
     <!-- CHARACTER EDITOR -->
-    <div v-if="modalController == 'characterEditor'" class="character-editor modal-mask">
+    <div v-if="modalController === 'characterEditor'" class="character-editor modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
           <div class="modal-header">
@@ -71,11 +72,10 @@
                 <label for="character-class">
                   Class:
                   <select v-model="editClassChoosed">
-                    <option value="Warrior">Warrior</option>
-                    <option value="Mage">Mage</option>
-                    <option value="Archer">Archer</option>
-                    <option value="Ninja">Ninja</option>
-                    <option value="Ghost">Ghost</option>
+                    <option
+                      v-for="(classToChoose, index) in classesToChoose"
+                      v-bind:key="index"
+                    >{{classToChoose}}</option>
                   </select>
                 </label>
               </form>
@@ -115,7 +115,8 @@ export default {
       characterBeingEdited: null,
       name: null,
       classChoosed: null,
-      characters: Array
+      characters: Array,
+      classesToChoose: ["Warrior", "Mage", "Archer", "Ninja"]
     };
   },
   mounted: function() {
@@ -128,36 +129,33 @@ export default {
         .then(response => (this.characters = response.data));
     },
     postCharacter: function() {
-      var self = this;
       axios
         .post("http://localhost:3000/characters", {
           name: this.name,
           class: this.classChoosed
         })
-        .then(function(response) {
+        .then(response => {
           console.log(response);
-          self.name = "";
-          self.classChoosed = "";
-          self.getCharacters();
+          this.name = "";
+          this.classChoosed = "";
+          this.getCharacters();
         })
-        .catch(function(error) {
+        .catch(error => {
           console.log(error);
         });
     },
     deleteCharacter: function(id) {
-      var self = this;
       axios
         .delete("http://localhost:3000/characters/" + id)
-        .then(function(response) {
+        .then(response => {
           console.log(response);
-          self.getCharacters();
+          this.getCharacters();
         })
-        .catch(function(error) {
+        .catch(error => {
           console.log(error);
         });
     },
     updateCharacter: function() {
-      var self = this;
       axios
         .patch(
           "http://localhost:3000/characters/" + this.characterBeingEdited._id,
@@ -166,24 +164,20 @@ export default {
             class: this.editClassChoosed
           }
         )
-        .then(function(response) {
+        .then(response => {
           console.log(response);
-          self.getCharacters();
-          // document.querySelector(".modal-mask").style.display = "none";
+          this.getCharacters();
         })
-        .catch(function(error) {
+        .catch(error => {
           console.log(error);
         });
     },
-    toggleEditCharacter: function(character) {
-      // var modal = this.$el.querySelector(".modal-mask");
-      if (this.modalController == "characterEditor") {
-        this.editName = character.name;
-        this.editClassChoosed = character.class;
-        this.characterBeingEdited = character;
-        // modal.style.display = "table";
+    toggleEditCharacter: function(characterToEdit) {
+      if (this.modalController === "characterEditor") {
+        this.editName = characterToEdit.name;
+        this.editClassChoosed = characterToEdit.class;
+        this.characterBeingEdited = characterToEdit;
       } else {
-        // modal.style.display = "none";
         this.editName = null;
         this.editClassChoosed = null;
         this.characterBeingEdited = null;
@@ -193,7 +187,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 label {
   display: block;
