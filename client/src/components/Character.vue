@@ -125,12 +125,12 @@ export default {
       characters: Array,
       modalController: "characterViewer",
       classesToChoose: ["Warrior", "Mage", "Archer", "Ninja"],
+      name: null,
+      classChoosed: null,
       editName: null,
       editClassChoosed: null,
       character: null,
       characterBeingEdited: null,
-      name: null,
-      classChoosed: null
     };
   },
   mounted: function() {
