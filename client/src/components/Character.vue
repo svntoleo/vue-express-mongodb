@@ -122,15 +122,15 @@ export default {
   },
   data: function() {
     return {
+      characters: Array,
       modalController: "characterViewer",
+      classesToChoose: ["Warrior", "Mage", "Archer", "Ninja"],
       editName: null,
       editClassChoosed: null,
       character: null,
       characterBeingEdited: null,
       name: null,
-      classChoosed: null,
-      characters: Array,
-      classesToChoose: ["Warrior", "Mage", "Archer", "Ninja"]
+      classChoosed: null
     };
   },
   mounted: function() {
