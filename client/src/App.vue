@@ -6,7 +6,6 @@
 
 <script>
 import Character from "./components/Character.vue";
-import axios from "axios";
 
 export default {
   name: "App",
