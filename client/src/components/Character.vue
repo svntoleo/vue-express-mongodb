@@ -9,14 +9,28 @@
     >
       <h1>{{ msg1 }}</h1>
 
-      <p v-for="(character, index) in characters" v-bind:key="index">
-        {{character.name}} is a {{character.class}}
-        <button
-          v-on:click="modalController = 'characterEditor'; toggleEditCharacter(character)"
-        >Edit</button>
-        <button v-on:click="deleteCharacter(character._id)">Delete</button>
-      </p>
+      <table v-if="characters.length > 0">
+        <tr>
+          <th>Index</th>
+          <th>Name</th>
+          <th>Class</th>
+          <th>Actions</th>
+        </tr>
+        <tr v-for="(character, index) in characters" v-bind:key="index">
+          <td>{{index}}</td>
+          <td>{{character.name}}</td>
+          <td>{{character.class}}</td>
+          <td>
+            <button
+              v-on:click="modalController = 'characterEditor'; toggleEditCharacter(character)"
+            >Edit</button>
+            <button v-on:click="deleteCharacter(character._id)">Delete</button>
+          </td>
+        </tr>
+      </table>
+      <p v-else>There are no characters to display :/</p>
     </div>
+
     <!-- CHARACTER CREATOR -->
     <div v-if="modalController === 'characterCreator'" class="character-creator modal-mask">
       <div class="modal-wrapper">
@@ -188,6 +202,11 @@ export default {
 </script>
 
 <style scoped>
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 label {
   display: block;
 }
