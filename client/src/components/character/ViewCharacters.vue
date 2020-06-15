@@ -38,7 +38,7 @@ export default {
     getCharacters: function() {
       axios
         .get("http://localhost:3000/characters")
-        .then(response => (this.characters = response.data));
+        .then(response => this.characters = response.data);
     },
     deleteCharacter: function(id) {
       axios

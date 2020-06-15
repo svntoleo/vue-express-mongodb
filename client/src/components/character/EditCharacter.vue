@@ -5,18 +5,18 @@
     <form>
       <label>
         Name:
-        <input type="text" v-model="character.name" @input="disabled = false"/>
+        <input type="text" v-model="character.name" @input="valueChanged = true"/>
       </label>
 
       <label>
         Class:
-        <select v-model="character.class" @input="disabled = false">
+        <select v-model="character.class" @input="valueChanged = true">
           <CharacterClasses />
         </select>
       </label>
     </form>
 
-    <button @click="updateCharacter(character)" :disabled="disabled || !character.name">Save</button>
+    <button @click="updateCharacter(character)" :disabled="!valueChanged || empty">Save</button>
     <button @click="getBack">Cancel</button>
   </div>
 </template>
@@ -35,7 +35,12 @@ export default {
   },
   data() {
     return {
-      disabled: true
+      valueChanged: false
+    }
+  },
+  computed: {
+    empty: function() {
+      return this.character.name && this.character.class ? false : true
     }
   },
   methods: {

@@ -16,7 +16,7 @@
       </label>
     </form>
 
-    <button @click="postCharacter" :disabled="!name || !classChoosed">Create character</button>
+    <button @click="postCharacter" :disabled="!validated">Create character</button>
     <button @click="getBack">Cancel</button>
   </div>
 </template>
@@ -35,6 +35,11 @@ export default {
       name: null,
       classChoosed: null
     };
+  },
+  computed: {
+    validated: function() {
+     return this.name && this.classChoosed ? true : false;
+    }
   },
   methods: {
     postCharacter: function() {
