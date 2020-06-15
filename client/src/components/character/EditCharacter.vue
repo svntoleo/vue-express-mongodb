@@ -5,7 +5,7 @@
     <form>
       <label>
         Name:
-        <input type="text" v-model="character.name" @input="valueChanged = true"/>
+        <input type="text" v-model="character.name" @input="valueChanged = true" />
       </label>
 
       <label>
@@ -36,11 +36,11 @@ export default {
   data() {
     return {
       valueChanged: false
-    }
+    };
   },
   computed: {
     empty: function() {
-      return this.character.name && this.character.class ? false : true
+      return this.character.name && this.character.class ? false : true;
     }
   },
   methods: {
