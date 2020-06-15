@@ -1,6 +1,6 @@
 <template>
   <div class="character">
-    <button v-on:click="modalController = 'characterCreator'">Create Character</button>
+    <button @click="modalController = 'characterCreator'">Create Character</button>
 
     <!-- CHARACTER VIEWER -->
     <div
@@ -16,15 +16,15 @@
           <th>Class</th>
           <th>Actions</th>
         </tr>
-        <tr v-for="(character, index) in characters" v-bind:key="index">
+        <tr v-for="(character, index) in characters" :key="index">
           <td>{{index}}</td>
           <td>{{character.name}}</td>
           <td>{{character.class}}</td>
           <td>
             <button
-              v-on:click="modalController = 'characterEditor'; toggleEditCharacter(character)"
+              @click="modalController = 'characterEditor'; toggleEditCharacter(character)"
             >Edit</button>
-            <button v-on:click="deleteCharacter(character._id)">Delete</button>
+            <button @click="deleteCharacter(character._id)">Delete</button>
           </td>
         </tr>
       </table>
@@ -47,7 +47,7 @@
               <select id="class-list" v-model="classChoosed">
                 <option
                   v-for="(classToChoose, index) in classesToChoose"
-                  v-bind:key="index"
+                  :key="index"
                 >{{classToChoose}}</option>
               </select>
             </label>
@@ -59,8 +59,8 @@
             <li>{{classChoosed}}</li>
           </ul>
 
-          <button v-on:click="postCharacter(); modalController = 'characterViewer'">Create character</button>
-          <button v-on:click="modalController = 'characterViewer'">Cancel</button>
+          <button @click="postCharacter(); modalController = 'characterViewer'">Create character</button>
+          <button @click="modalController = 'characterViewer'">Cancel</button>
         </div>
       </div>
     </div>
@@ -98,9 +98,7 @@
 
           <div class="modal-footer">
             <slot name="footer">
-              <button
-                v-on:click="updateCharacter(character);modalController = 'characterViewer'"
-              >Save</button>
+              <button @click="updateCharacter(character); modalController = 'characterViewer'">Save</button>
               <button v-on:click="modalController = 'characterViewer'; toggleEditCharacter">Cancel</button>
             </slot>
           </div>
@@ -130,7 +128,7 @@ export default {
       editName: null,
       editClassChoosed: null,
       character: null,
-      characterBeingEdited: null,
+      characterBeingEdited: null
     };
   },
   mounted: function() {
