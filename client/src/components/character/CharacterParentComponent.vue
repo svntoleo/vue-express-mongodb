@@ -2,7 +2,7 @@
   <div class="character">
     <button @click="modalController = 'characterCreator'">Create Character</button>
 
-    <ViewCharacters v-if="modalController === 'characterViewer'||'characterCreator'" />
+    <ViewCharacters v-if="modalController === 'characterViewer'" />
 
     <CreateCharacter v-if="modalController === 'characterCreator'" />
 
