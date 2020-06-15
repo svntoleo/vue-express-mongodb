@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <Character msg1="Your Characters" msg2="Create Character" msg3="Edit Character"/>
+    <CharacterParentComponent/>
   </div>
 </template>
 
 <script>
-import Character from "./components/Character.vue";
+import CharacterParentComponent from "./components/character/CharacterParentComponent.vue";
 
 export default {
   name: "App",
   components: {
-    Character
+    CharacterParentComponent
   }
 };
 </script>
@@ -23,5 +23,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+label {
+  display: block;
 }
 </style>
