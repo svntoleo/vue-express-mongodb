@@ -4,13 +4,11 @@
 
     <table v-if="characters.length > 0">
       <tr>
-        <th>Index</th>
         <th>Name</th>
         <th>Class</th>
         <th>Actions</th>
       </tr>
-      <tr v-for="(character, index) in characters" :key="index">
-        <td>{{index}}</td>
+      <tr v-for="character in characters" :key="character._id">
         <td>{{character.name}}</td>
         <td>{{character.class}}</td>
         <td>
