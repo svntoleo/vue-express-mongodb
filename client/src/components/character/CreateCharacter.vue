@@ -16,7 +16,7 @@
       </label>
     </form>
 
-    <button @click="postCharacter">Create character</button>
+    <button @click="postCharacter" :disabled="!name || !classChoosed">Create character</button>
     <button @click="getBack">Cancel</button>
   </div>
 </template>
